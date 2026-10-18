@@ -10,7 +10,21 @@ get finer tiles, images with big objects skip tiling. No retraining anywhere.
 ## Results
 
 <!-- results:start -->
-_Run it to populate._
+# RF-DETR tiling on VisDrone2019-DET-val, 2026-10-18
+
+100 images. RF-DETR Base, COCO weights, no retraining. VisDrone classes mapped to COCO: bicycle, bus, car, motorcycle, person, truck.
+
+| Inference | mAP50 | mAP50, small objects (<32x32) | Seconds per image |
+|---|---|---|---|
+| full | 0.345 | 0.092 | 0.86 |
+| fixed_640 | 0.403 | 0.122 | 4.60 |
+| adaptive | 0.427 | 0.162 | 4.99 |
+
+## Honest limits
+
+- COCO weights on drone imagery. A fine-tuned RF-DETR would score far higher; this measures what tiling adds to the same weights.
+- 11-point VOC AP at IoU 0.5, implemented here, not COCO's 101-point AP. Use it to compare rows, not to compare with papers.
+- The adaptive rule has four size buckets set by hand. It shows the idea pays off or doesn't, not a tuned policy.
 <!-- results:end -->
 
 ## Run it
